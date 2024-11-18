@@ -36,14 +36,14 @@ public class Movement : MonoBehaviour
         float rotationAmount = horizontal * turnspeed * Time.deltaTime;
 
         transform.Rotate(0f, 0f, -rotationAmount);
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))  
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))  
         {
             rb.AddForce(transform.up * thrust);
         }
         rb.velocity *= drag;
 
         //Shooting
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && Time.time >= nextFireTime)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && Time.time >= nextFireTime)
         {
             Fire();
             nextFireTime = Time.time + fireRate;
