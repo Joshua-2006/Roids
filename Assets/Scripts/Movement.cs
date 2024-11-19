@@ -6,16 +6,16 @@ public class Movement : MonoBehaviour
 { 
     [Header ("Movement")]
     [SerializeField] private float turnspeed = 200f;
-    [SerializeField] private float thrust = 5f;
-    [SerializeField] private float drag = 0.99f;
+    public float thrust = 5f;
+    [SerializeField] public float drag = 0.99f;
     private float horizontal;
+    private float vertical;
     private Rigidbody rb;
 
     [Header ("Bullet")]
     [SerializeField] GameObject bullet;
-    public float bulletSpeed = 10f;  
-    public float fireRate = 0.3f;    
-    private float nextFireTime = 0f;
+    [SerializeField] private float fireRate = 0.3f;    
+    [SerializeField ]private float nextFireTime = 0f;
     private Vector3 offset = new Vector3(0f, 0f, -1f);
     private Vector3 one;
 
@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         one = transform.position - offset;
         //Movement
@@ -36,27 +36,30 @@ public class Movement : MonoBehaviour
         float rotationAmount = horizontal * turnspeed * Time.deltaTime;
 
         transform.Rotate(0f, 0f, -rotationAmount);
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))  
+
+        
+        vertical = Input.GetAxis("Vertical");
+
+        
+        if (vertical > 0) 
         {
-            rb.AddForce(transform.up * thrust);
+            Vector2 thrustDirection = transform.up; 
+            rb.AddForce(thrustDirection * vertical * thrust);
         }
+
         rb.velocity *= drag;
 
         //Shooting
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && Time.time >= nextFireTime)
+        if (Input.GetButtonDown("Fire") && Time.time > nextFireTime)
         {
             Fire();
             nextFireTime = Time.time + fireRate;
+            
         }
     }
     void Fire()
     {
-        bullet = Instantiate(bullet, one, transform.rotation);
-
-        Rigidbody rb2 = bullet.GetComponent<Rigidbody>();
-
-        rb2.velocity = transform.up * bulletSpeed;
-
-        Destroy(bullet, 3f);
+        Instantiate(bullet, one, transform.rotation);
+        Destroy(bullet, 2f);
     }
 }
