@@ -33,6 +33,14 @@ public class ScreenWrap : MonoBehaviour
         else if (position.y < -screenBounds.y)
             position.y = screenBounds.y;
 
+        if(position.z > -0.9f)
+        {
+            position.z = -1f;
+        }
+        else if(position.z < -1.1)
+        {
+            position.z = -1f;
+        }
         transform.position = position;
     }
 }

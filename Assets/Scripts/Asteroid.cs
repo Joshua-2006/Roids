@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Asteroid : MonoBehaviour
 {
-    private Rigidbody rb;
-    [SerializeField] private float speed;
+    public SpawnManager sm;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         float zRange = Random.Range(0, 360);
         transform.rotation = Quaternion.Euler(0f, 0f, zRange);
     }
@@ -19,26 +19,17 @@ public class Asteroid : MonoBehaviour
     {
         transform.Translate(transform.up * Time.deltaTime * speed);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        BoxCollider bc = GetComponent<BoxCollider>();
-        bc.isTrigger = false;
-        if (other.CompareTag("Player"))
-        {
-            Destroy(other.gameObject);
-        }
-    }
     private void OnCollisionEnter(Collision collision)
     {
-        BoxCollider bc = GetComponent<BoxCollider>();
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            bc.isTrigger = true;
+            Destroy(collision.gameObject);
+            //SceneManager.LoadScene("Game Over");
         }
-        else if(collision.gameObject.CompareTag("Fire"))
+        if(collision.gameObject.CompareTag("Fire"))
         {
-            bc.isTrigger = false;
+            Instantiate(sm.asteroid2, sm.asteroid.transform.position, sm.asteroid.transform.rotation);
+            Instantiate(sm.asteroid2, sm.asteroid.transform.position, sm.asteroid.transform.rotation);
         }
     }
-  
 }
