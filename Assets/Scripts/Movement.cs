@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Movement : MonoBehaviour
 {
@@ -16,12 +18,13 @@ public class Movement : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
 
-
+    [Header("UI")]
+    [SerializeField] GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+  
     }
 
     // Update is called once per frame
@@ -53,10 +56,17 @@ public class Movement : MonoBehaviour
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
+
+        if (gm.lives1 <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
-    IEnumerator Wait()
+    private void OnCollisionEnter(Collision collision)
     {
-        yield return new WaitForSeconds(1);
-        
+        if(gm.lives1 <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

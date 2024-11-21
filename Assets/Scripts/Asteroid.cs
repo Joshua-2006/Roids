@@ -7,9 +7,11 @@ public class Asteroid : MonoBehaviour
 {
     public SpawnManager sm;
     public float speed;
+    public GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
+        speed = 1;
         float zRange = Random.Range(0, 360);
         transform.rotation = Quaternion.Euler(0f, 0f, zRange);
     }
@@ -23,13 +25,13 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            gm.lives1 -= 1;
             //SceneManager.LoadScene("Game Over");
         }
         if(collision.gameObject.CompareTag("Fire"))
         {
-            Instantiate(sm.asteroid2, sm.asteroid.transform.position, sm.asteroid.transform.rotation);
-            Instantiate(sm.asteroid2, sm.asteroid.transform.position, sm.asteroid.transform.rotation);
+            Instantiate(sm.asteroid2, sm.SpawnPos(), sm.asteroid.transform.rotation);
+            Instantiate(sm.asteroid2, sm.SpawnPos(), sm.asteroid.transform.rotation);
         }
     }
 }

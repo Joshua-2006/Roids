@@ -116,11 +116,10 @@ MonoBehaviour:
   turnspeed: 200
   thrust: 10
   drag: 0.99
-  bullet: {fileID: 6970831456945300743, guid: ddb1132f4b5a448448f2490b4825d9a6, type: 3}
+  bulletPrefab: {fileID: 6970831456945300743, guid: ddb1132f4b5a448448f2490b4825d9a6,
+    type: 3}
   firePoint: {fileID: 4932243794462021484}
-  fireRate: 0.1
-  nextFireTime: 0
-  bulletSpeed: 10
+  gm: {fileID: 3839649543893400722, guid: ed3262b481d271640a7b7f440c19eb41, type: 3}
 --- !u!54 &4932243794187264308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e85fe1eeeb5bd14d881142b698c9cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 2489227997688157633, guid: ea84158eaee77014aa146483092cc980,
+    type: 3}
 --- !u!1 &4932243794462021485
 GameObject:
   m_ObjectHideFlags: 0

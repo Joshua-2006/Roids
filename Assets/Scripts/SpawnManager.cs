@@ -26,7 +26,8 @@ public class SpawnManager : MonoBehaviour
         }
         if(asteroids <= 0)
         {
-            asteroidss.speed += 1; 
+            asteroidss.speed += 1;
+            asteroidsss.speed += 1;
             asteroids = 4;
             Spawn(asteroids);
         }
