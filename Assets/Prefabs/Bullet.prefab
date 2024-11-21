@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1163443283268175758}
   - component: {fileID: -2754860029248248773}
   - component: {fileID: -8773065131080297235}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,3 +142,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a344e403269c157458503fcdc3f3cff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpeed: 10

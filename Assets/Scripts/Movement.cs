@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
-{ 
-    [Header ("Movement")]
+{
+    [Header("Movement")]
     [SerializeField] private float turnspeed = 200f;
     public float thrust = 5f;
     [SerializeField] public float drag = 0.99f;
@@ -12,54 +12,51 @@ public class Movement : MonoBehaviour
     private float vertical;
     private Rigidbody rb;
 
-    [Header ("Bullet")]
-    [SerializeField] GameObject bullet;
-    [SerializeField] private float fireRate = 0.3f;    
-    [SerializeField ]private float nextFireTime = 0f;
-    private Vector3 offset = new Vector3(0f, 0f, -1f);
-    private Vector3 one;
+    [Header("Bullet")]
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        one = transform.position - offset;
         //Movement
         horizontal = Input.GetAxis("Horizontal");
         float rotationAmount = horizontal * turnspeed * Time.deltaTime;
 
         transform.Rotate(0f, 0f, -rotationAmount);
 
-        
+
         vertical = Input.GetAxis("Vertical");
 
-        
-        if (vertical > 0) 
+
+        if (vertical > 0)
         {
-            Vector2 thrustDirection = transform.up; 
+            Vector2 thrustDirection = transform.up;
             rb.AddForce(thrustDirection * vertical * thrust);
         }
 
         rb.velocity *= drag;
 
-        //Shooting
-        if (Input.GetButtonDown("Fire") && Time.time > nextFireTime)
+       
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Shoot"))
         {
-            Fire();
-            nextFireTime = Time.time + fireRate;
-            
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
     }
-    void Fire()
+    IEnumerator Wait()
     {
-        Instantiate(bullet, one, transform.rotation);
-        Destroy(bullet, 2f);
+        yield return new WaitForSeconds(1);
+        
     }
 }
