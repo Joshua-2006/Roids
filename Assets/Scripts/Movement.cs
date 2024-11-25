@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     private float horizontal;
     private float vertical;
     private Rigidbody rb;
+    [SerializeField] private ParticleSystem ps;
 
     [Header("Bullet")]
     [SerializeField] GameObject bulletPrefab;
@@ -24,7 +25,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-  
+        ps.Stop();
     }
 
     // Update is called once per frame
@@ -44,6 +45,11 @@ public class Movement : MonoBehaviour
         {
             Vector2 thrustDirection = transform.up;
             rb.AddForce(thrustDirection * vertical * thrust);
+            ps.Play();
+        }
+        else if(vertical == 0)
+        {
+            ps.Stop();
         }
 
         rb.velocity *= drag;
@@ -57,14 +63,18 @@ public class Movement : MonoBehaviour
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
 
-        if (gm.lives1 <= 0)
+        if (gm.lives <= 0)
         {
             Destroy(this.gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(gm.lives1 <= 0)
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            gm.lives -= 1;
+        }
+        if (gm.lives <= 0)
         {
             Destroy(this.gameObject);
         }

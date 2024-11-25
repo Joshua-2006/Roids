@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
 {
     [Header("Player Stuff")]
     [SerializeField] private GameObject player;
-    [SerializeField] private TextMeshProUGUI score;
-    [SerializeField] private TextMeshProUGUI lives;
-    public int lives1;
-    [SerializeField] private int score1;
+    public TextMeshProUGUI scoretext;
+    public TextMeshProUGUI livestext;
+    [SerializeField] private int extraLives;
+    public int lives = 3;
+    public int score = 0;
 
     [Header("Restart")]
     [SerializeField] Button button;
@@ -20,16 +21,26 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(lives1 <= 0)
+        if(lives < extraLives)
+        {
+            extraLives = lives;
+            livestext.text = $"Lives: {lives}";
+        }
+        if(lives <= 0)
         {
             restart.gameObject.SetActive(true);
             button.gameObject.SetActive(true);
         }
+    }
+    public void Score()
+    {
+        score += 50;
+        scoretext.text = $"Score: {score}";
     }
 }

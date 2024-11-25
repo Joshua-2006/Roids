@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
         
         asteroids = FindObjectsOfType<Asteroid>().Length;
         if(asteroid!.activeInHierarchy)
-        {
+        { 
             Instantiate(asteroid2, asteroid.transform.position, asteroid.transform.rotation);
             Instantiate(asteroid2, asteroid.transform.position, asteroid.transform.rotation);
         }

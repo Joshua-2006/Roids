@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
+  gm: {fileID: 3839649543893400722, guid: ed3262b481d271640a7b7f440c19eb41, type: 3}

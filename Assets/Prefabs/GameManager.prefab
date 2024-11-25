@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f340d20c10f9424a8655107dc17822d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  score: {fileID: 0}
-  lives: {fileID: 0}
-  lives1: 3
-  score1: 0
+  player: {fileID: 4932243794187264318, guid: 0316d23076e3fa04eb55775c78c8085e, type: 3}
+  scoretext: {fileID: 0}
+  livestext: {fileID: 0}
+  extraLives: 3
+  lives: 3
+  score: 0
   button: {fileID: 0}
   restart: {fileID: 0}
