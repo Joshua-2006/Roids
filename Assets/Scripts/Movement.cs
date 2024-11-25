@@ -14,10 +14,12 @@ public class Movement : MonoBehaviour
     private float vertical;
     private Rigidbody rb;
     [SerializeField] private ParticleSystem ps;
+    [SerializeField] private Audio audio1;
 
     [Header("Bullet")]
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
+    [SerializeField] AudioSource audios;
 
     [Header("UI")]
     [SerializeField] GameManager gm;
@@ -61,6 +63,7 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("Shoot"))
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            audios.Play();
         }
 
         if (gm.lives <= 0)
@@ -76,6 +79,7 @@ public class Movement : MonoBehaviour
         }
         if (gm.lives <= 0)
         {
+            audio1.audio3 = true;
             Destroy(this.gameObject);
         }
     }

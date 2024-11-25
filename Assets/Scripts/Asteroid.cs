@@ -8,14 +8,15 @@ public class Asteroid : MonoBehaviour
     public SpawnManager sm;
     public float speed;
     private GameManager gm;
+    private Audio child;
     // Start is called before the first frame update
     void Start()
     {
         
-        speed = 1;
         float zRange = Random.Range(0, 360);
         transform.rotation = Quaternion.Euler(0f, 0f, zRange);
         gm = FindAnyObjectByType<GameManager>();
+        child = FindAnyObjectByType<Audio>();
     }
 
     // Update is called once per frame
@@ -23,18 +24,27 @@ public class Asteroid : MonoBehaviour
     {
         transform.Translate(transform.up * Time.deltaTime * speed);
     }
+    private void Update()
+    {
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Fire"))
         {
+            
+            child.audio2 = true;
+            gm.Score();
             Destroy(gameObject);
             Destroy(collision.gameObject);
-            gm.Score();
-            
             Instantiate(sm.asteroid2, sm.SpawnPos(), sm.asteroid.transform.rotation);
             Instantiate(sm.asteroid2, sm.SpawnPos(), sm.asteroid.transform.rotation);
-            
-            
         }
+        
+    }
+    IEnumerator Wait()
+    {
+        gm.Score();
+        yield return new WaitForSeconds(0.5f);
+        gm.currentscore = gm.score;
     }
 }

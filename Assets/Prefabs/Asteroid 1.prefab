@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sm: {fileID: 0}
   speed: 1
-  gm: {fileID: 3839649543893400722, guid: ed3262b481d271640a7b7f440c19eb41, type: 3}
+  child: {fileID: 2217823720366794020, guid: dde4ce86ef16de540a2ed88f37125a80, type: 3}
 --- !u!114 &3289938840685153714
 MonoBehaviour:
   m_ObjectHideFlags: 0

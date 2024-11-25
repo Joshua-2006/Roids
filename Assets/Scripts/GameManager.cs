@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int extraLives;
     public int lives = 3;
     public int score = 0;
+    public int currentscore = 0;
 
     [Header("Restart")]
     [SerializeField] Button button;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
+        
     }
 
     // Update is called once per frame

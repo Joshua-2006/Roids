@@ -15,7 +15,7 @@ public class SceneMover : MonoBehaviour
     }
     public void Send()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void Update()
     {

@@ -6,12 +6,19 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject asteroid;
     public GameObject asteroid2;
+    public GameObject player;
     [SerializeField] private int asteroids;
     [SerializeField] private Asteroid asteroidss;
     [SerializeField] private Asteroid asteroidsss;
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private GameManager gm;
+    public AudioSource audios;
+    public AudioSource audiod;
     // Start is called before the first frame update
     void Start()
     {
+        asteroidss.speed = 1;
+        asteroidsss.speed = 1;
     }
 
     // Update is called once per frame
@@ -19,12 +26,7 @@ public class SpawnManager : MonoBehaviour
     {
         
         asteroids = FindObjectsOfType<Asteroid>().Length;
-        if(asteroid!.activeInHierarchy)
-        { 
-            Instantiate(asteroid2, asteroid.transform.position, asteroid.transform.rotation);
-            Instantiate(asteroid2, asteroid.transform.position, asteroid.transform.rotation);
-        }
-        if(asteroids <= 0)
+        if(asteroids == 0)
         {
             asteroidss.speed += 1;
             asteroidsss.speed += 1;

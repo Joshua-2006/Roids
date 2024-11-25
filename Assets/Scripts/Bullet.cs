@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField ] private GameManager gm;
+    [SerializeField] private SpawnManager sm;
+    public bool sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,7 @@ public class Bullet : MonoBehaviour
     {
         if(gameObject.CompareTag("Enemy"))
         {
-        Destroy(this.gameObject);
-        Destroy(collision.gameObject);
+            sound = true; 
         }
     }
 }
